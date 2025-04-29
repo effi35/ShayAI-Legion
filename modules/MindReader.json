@@ -1,0 +1,26 @@
+{
+  "name": "MindReader",
+  "description": "מודול קריאה, עיבוד והבנת קבצים מכל סוגי המדיה לצורך הזנת בנק הזיכרון של המערכת.",
+  "version": "1.0",
+  "features": [
+    "קריאת קבצי PDF, DOCX, TXT ותמונות OCR",
+    "פענוח טקסט מתוך וידאו ושמע",
+    "הפקת תובנות מכל מקור מידע",
+    "אינטגרציה מיידית לזיכרון הכללי",
+    "סנכרון ידע בין כל המודולים"
+  ],
+  "supported_formats": [
+    "PDF",
+    "DOCX",
+    "TXT",
+    "JPG/PNG (OCR)",
+    "MP4/MP3 (Speech to Text)"
+  ],
+  "processing_pipeline": [
+    "scan",
+    "extract_text",
+    "analyze_content",
+    "generate_summary",
+    "update_knowledge_base"
+  ]
+}

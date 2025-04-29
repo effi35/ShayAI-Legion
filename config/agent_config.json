@@ -1,0 +1,27 @@
+{
+    "default_agent": {
+      "mode": "simple",
+      "auto_retry": true,
+      "ping_interval_seconds": 10,
+      "save_results": true,
+      "send_email_on_success": true,
+      "fallback_email": "effi35@gmail.com",
+      "task_priority": "normal",
+      "max_error_retries": 3,
+      "logging": true
+    },
+    "advanced_agent": {
+      "mode": "extended",
+      "auto_retry": true,
+      "ping_interval_seconds": 5,
+      "save_results": true,
+      "send_email_on_success": true,
+      "fallback_email": "effi35@gmail.com",
+      "task_priority": "high",
+      "max_error_retries": 5,
+      "self_healing": true,
+      "dynamic_scaling": true,
+      "logging": true
+    }
+  }
+  
