@@ -1,0 +1,23 @@
+{
+    "name": "AgentSmith",
+    "description": "מודול יצירה, ניהול ובקרה על סוכני AI עצמאיים המבצעים משימות חיפוש, עיבוד ואיסוף מידע בעולם הדיגיטלי.",
+    "version": "1.0",
+    "features": [
+      "יצירת סוכנים חכמים עם פרמטרים מותאמים אישית",
+      "מעקב ובקרה על פעולות הסוכן",
+      "הפעלה וכיבוי של סוכנים לפי צורך",
+      "דיווח תוצאות ותקלות בזמן אמת",
+      "ניהול עומסים בין סוכנים אוטומטית"
+    ],
+    "agent_parameters": {
+      "max_active_agents": 20,
+      "default_search_timeout": "90 seconds",
+      "priority_levels": ["Critical", "High", "Normal", "Low"]
+    },
+    "learning_capabilities": {
+      "adaptive_search_improvement": true,
+      "knowledge_base_sync": true,
+      "self_repair": true
+    }
+  }
+  

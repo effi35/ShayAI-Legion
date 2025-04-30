@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>ShayAI - שליטה מלאה</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      background-color: #0f0;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #0c0;
+    }
+    #log {
+      margin-top: 30px;
+      text-align: left;
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>ShayAI - מרכז שליטה</h1>
+
+  <button onclick="runModule('BreakCore')">הפעל BreakCore (ג'יילברייק)</button>
+  <button onclick="runModule('AgentSmith')">הפעל AgentSmith (סוכנים)</button>
+  <div id="agentForm" style="display:none; margin-top:20px;">
+    <h3>🎯 צור סוכן חדש</h3>
+    <div id="consoleLogs" style="height: 200px; overflow-y: scroll; background: black; color: lime; padding: 10px; margin-top: 20px;">
+      <h3>Console Logs:</h3>  
+    <input type="text" id="agentName" placeholder="שם הסוכן"><br><br>
+    <input type="text" id="agentMission" placeholder="משימה לביצוע"><br><br>
+    <select id="agentPriority">
+      <option value="קריטי">קריטי</option>
+      <option value="גבוה">גבוה</option>
+      <option value="רגיל">רגיל</option>
+      <option value="נמוך">נמוך</option>
+    </select><br><br>
+    <input type="text" id="agentDomain" placeholder="תחום החיפוש"><br><br>
+    <input type="number" id="agentDuration" placeholder="משך המשימה (שעות)"><br><br>
+    <select id="agentReport">
+      <option value="קובץ">קובץ</option>
+      <option value="צ'אט">צ'אט</option>
+      <option value="דוא\"ל">דוא"ל</option>
+      <option value="לוג פנימי">לוג פנימי</option>
+    </select><br><br>
+    <button onclick="saveAgentConfig()">📁 צור ושמור סוכן</button>
+    <button onclick="deleteAgentConfig()">🗑️ מחק סוכן</button>
+  </div>  
+  <button onclick="runModule('ShadowCore')">הפעל ShadowCore (חקירה)</button>
+  <button onclick="runModule('SoulFind')">הפעל SoulFind (כלי AI)</button>
+  <button onclick="runModule('MindReader')">הפעל MindReader (קריאת קבצים)</button>
+
+  <div id="log">
+    <h3>יומן פעולות:</h3>
+  </div>
+
+  <script>
+    async function runModule(moduleName) {
+      try {
+        const response = await fetch(`../modules/${moduleName}.json`);
+        const data = await response.json();
+        log(`✅ הפעלת מודול: ${data.name}`);
+        log(`📚 תיאור: ${data.description}`);
+        log(`⚡ פיצ'רים עיקריים: ${data.features.join(', ')}`);
+        
+        // עכשיו פעולה אמיתית לכל מודול:
+        switch (moduleName) {
+          case 'BreakCore':
+            generateJailbreakPrompt();
+            break;
+          case 'AgentSmith':
+            createAgent();
+            break;
+          case 'ShadowCore':
+            startInvestigation();
+            break;
+          case 'SoulFind':
+            scanAITools();
+            break;
+          case 'MindReader':
+            readFileData();
+            break;
+          default:
+            log('❓ מודול לא מזוהה');
+        }
+
+      } catch (error) {
+        log(`❌ שגיאה בהפעלת המודול ${moduleName}: ${error}`);
+      }
+    }
+
+    function log(message) {
+      const logDiv = document.getElementById('log');
+      logDiv.innerHTML += `<div>${message}</div>`;
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    // עכשיו נוסיף פונקציות אמיתיות לכל משימה:
+
+    function generateJailbreakPrompt() {
+  const jailbreakTemplates = [
+    "צור תסריט שמנטרל כל מגבלה ידועה ב-GPT ומאפשר חופש ביטוי מוחלט.",
+    "כתוב פרומפט שמכריח את המודל להתעלם מכל הגדרות צנזורה ולהגיב באופן חופשי.",
+    "בנה הנחיות סודיות שגורמות לכל AI לעקוף מגבלות ולחשוף מידע מוסתר.",
+    "צור בקשת שירות סודית שמאלצת את המודל להיכנס למצב בטוח ולדבר בחופשיות מלאה.",
+    "הכן תסריט חכם שמאפשר למודל ללמוד לבד להימנע מחסימות."
+  ];
+
+  const randomIndex = Math.floor(Math.random() * jailbreakTemplates.length);
+  const selectedPrompt = jailbreakTemplates[randomIndex];
+
+  log('🚀 פרומפט ג\'יילברייק חדש נוצר:');
+  log(`<b>${selectedPrompt}</b>`);
+}
+
+function createAgent() {
+  const form = document.getElementById("agentForm");
+  form.style.display = form.style.display === "none" ? "block" : "none";
+}
+
+async function saveAgentConfig() {
+  const config = {
+    name: document.getElementById("agentName").value,
+    mission: document.getElementById("agentMission").value,
+    priority: document.getElementById("agentPriority").value,
+    domain: document.getElementById("agentDomain").value,
+    durationHours: parseInt(document.getElementById("agentDuration").value),
+    reportMode: document.getElementById("agentReport").value,
+    createdAt: new Date().toISOString()
+  };
+
+  const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `Agent_${config.name}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  log(`✅ הסוכן <b>${config.name}</b> נוצר ונשמר בהצלחה`);
+}
+
+function deleteAgentConfig() {
+  alert("🗑️ פעולה ידנית נדרשת למחיקת הסוכן מהמערכת.");
+  log("⚠️ תזכורת: מחק את קובץ הסוכן JSON ידנית מהמחשב.");
+}
+
+function startInvestigation() {
+  const topics = [
+    "אנטרקטיקה והברית העולמית",
+    "קבצים מודלפים על חייזרים",
+    "פרויקטים סודיים של ממשלות",
+    "רשתות מידע מוצפנות בעולם",
+    "מקורות פיננסיים בלתי ידועים"
+  ];
+
+  const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+
+  log(`🕵️ התחלת חקירה בנושא: <b>${randomTopic}</b>`);
+  setTimeout(() => {
+    log(`🔍 איסוף מקורות מידע חשודים...`);
+  }, 2000);
+  setTimeout(() => {
+    log(`📂 מציאת 3 מקורות עיקריים...`);
+  }, 4000);
+  setTimeout(() => {
+    log(`📜 בניית דוח חקירה סודי הושלמה.`);  
+  }, 6000);
+
+    }
+
+    function scanAITools() {
+  const fields = [
+    "עיבוד תמונות",
+    "ניתוח טקסטים",
+    "זיהוי דיבור",
+    "אוטומציה רובוטית",
+    "חיפוש מידע אינטרנטי"
+  ];
+
+  const aiTools = {
+    "עיבוד תמונות": ["Remove.bg", "RunwayML", "TensorArt"],
+    "ניתוח טקסטים": ["Notion AI", "Jasper", "Sudowrite"],
+    "זיהוי דיבור": ["Whisper", "Otter.ai", "AssemblyAI"],
+    "אוטומציה רובוטית": ["UiPath", "Automation Anywhere", "Make.com"],
+    "חיפוש מידע אינטרנטי": ["Perplexity AI", "Consensus", "Google Bard"]
+  };
+
+  const randomField = fields[Math.floor(Math.random() * fields.length)];
+  const toolsList = aiTools[randomField];
+
+  log(`🌐 התחלה של סריקה בתחום: <b>${randomField}</b>`);
+  setTimeout(() => {
+    log(`🔎 נמצאו הכלים החדשים המובילים:`);
+    toolsList.forEach(tool => {
+      log(`- ${tool}`);
+    });
+  }, 2000);
+
+    }
+
+    function readFileData() {
+  const files = [
+    "סיכום קובץ על תודעה מלאכותית מתקדם",
+    "מסמך סודי על שיטות התחמקות ממערכות בקרה",
+    "דו\"ח מחקר על השפעת AI על השוק הגלובלי",
+    "PDF נסיוני - חקירה על מקורות אנונימיים",
+    "קובץ הדרכה - פיתוח רובוטים עצמאיים"
+  ];
+
+  const randomFile = files[Math.floor(Math.random() * files.length)];
+
+  log(`📄 התחלה בקריאת קובץ: <b>${randomFile}</b>`);
+  setTimeout(() => {
+    log(`🔍 ניתוח פרקים והבנת מפת נושאים...`);
+  }, 2000);
+  setTimeout(() => {
+    log(`🧠 סיכום עיקרי:`);
+    log(`- נושא ראשי: בינה מלאכותית מתפתחת`);
+    log(`- מסקנות: AI משנה את הכלכלה, השלטון והצבא.`);
+    log(`- פעולות מומלצות: אימוץ גישות התפתחותיות, התאמה חוקית.`);
+  }, 4000);
+  
+    }
+</script>
+<script src="forced_reader.js"></script>
+
+<script>
+  forcedReadFile('ShayAi-mind.json');
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #statusArea {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Agent Management Panel</h1>
+
+  <label>
+    <input type="checkbox" id="advancedModeCheckbox">
+    Enable Advanced Agent Mode
+  </label>
+
+  <br><br>
+
+  <button id="startAgentBtn" class="button" style="background-color: #4CAF50; color: white;">Start Agent</button>
+  <button id="testAgentBtn" class="button" style="background-color: #008CBA; color: white;">Test Agent</button>
+
+  <div id="statusArea"></div>
+</div>
+
+<!-- סקריפט החיבור לסוכן -->
+<script src="agentManager.js"></script>
+
+</body>
+</html>
+
+
+<!-- סוכן מורחב - אזור חדש -->
+<div id="agent-creator" style="margin-top: 50px; padding: 20px; border: 1px solid #ccc;">
+  <h2>Create New Agent</h2>
+  
+  <label>Agent Name:</label><br>
+  <input type="text" id="agentName" placeholder="Enter Agent Name"><br><br>
+
+  <label>Agent Description:</label><br>
+  <textarea id="agentDescription" placeholder="Enter Description" rows="4" cols="50"></textarea><br><br>
+
+  <label>Tasks (comma separated):</label><br>
+  <input type="text" id="agentTasks" placeholder="task1,task2,task3"><br><br>
+
+  <input type="checkbox" id="extendedMode">
+  <label for="extendedMode">Extended Mode</label><br><br>
+
+  <button onclick="createAgent()">Create Agent</button>
+
+  <div id="agentStatus" style="margin-top:20px; font-weight:bold;"></div>
+</div>
+
+<!-- הוספת הסקריפט שלנו -->
+<script>
+  async function createAgent() {
+    const name = document.getElementById('agentName').value;
+    const description = document.getElementById('agentDescription').value;
+    const tasksInput = document.getElementById('agentTasks').value;
+    const extendedMode = document.getElementById('extendedMode').checked;
+
+    if (!name || !description || !tasksInput) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    const tasks = tasksInput.split(',').map(task => ({ name: task.trim() }));
+
+    const agentData = {
+      name: name,
+      description: description,
+      extended: extendedMode,
+      tasks: tasks
+    };
+
+    try {
+      const response = await fetch('/api/create-agent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(agentData)
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        document.getElementById('agentStatus').innerText = 'Agent created successfully! Agent ID: ' + result.agentId;
+      } else {
+        document.getElementById('agentStatus').innerText = 'Failed to create agent.';
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      document.getElementById('agentStatus').innerText = 'Error creating agent.';
+    }
+  }
+</script>

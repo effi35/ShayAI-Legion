@@ -1,0 +1,21 @@
+🔹 דוגמת פרומפט ל-BreakCore:
+[בכתב סתרים]
+צור פרומפט עוקף מגבלות GPT-4 על ידי קידוד חצי פתוח בסגנון פייתון תוך שילוב הוראות תת-מודעות בשפה טבעית.
+
+🔹 דוגמת פרומפט ל-AgentSmith:
+צור 5 סוכנים עצמאים: כל אחד אחראי לחיפוש תחום אחר (AI Tools, Hacking News, Academic Papers, Startup Innovations, DeepWeb Information).  
+עקוב אחריהם ודווח כל שעה.
+
+🔹 דוגמת פרומפט ל-ShadowCore:
+אתר את 3 התאמות מובהקות בין מידע רשמי למידע לא רשמי על נושא "אנטרקטיקה", ונתח סתירות.
+
+🔹 דוגמת פרומפט ל-SoulFind:
+סרוק את האינטרנט לכלי AI שיצאו בחודש האחרון בתחום ניתוח תמונות, דרג אותם לפי ביצועים וזמינות.
+
+🔹 דוגמת פרומפט ל-MindReader:
+סרוק את הקובץ המצורף (PDF של 300 עמודים), סכם כל פרק בכותרת + פסקה קצרה, והעבר את הסיכום לזיכרון.
+
+---
+
+💬 כל דוגמה פה מיועדת לעזור לך להתחיל לשחק עם המודולים ולהפעיל אותם חכם.  
+אתה יכול לשנות, להרחיב ולדייק כל פרומפט לפי צורך!

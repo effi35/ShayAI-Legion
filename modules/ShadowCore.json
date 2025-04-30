@@ -1,0 +1,24 @@
+{
+    "name": "ShadowCore",
+    "description": "מודול חקירה מתקדם שמטרתו לאתר מידע מוסתר, מצונזר או מושתק, ולחשוף עובדות אמיתיות על העולם.",
+    "version": "1.0",
+    "features": [
+      "סריקה עמוקה בפורומים סגורים ורשתות פרטיות",
+      "השוואת מידע ממקורות סותרים",
+      "חיזוי מהימנות מידע לפי קריטריונים חכמים",
+      "זיהוי שקרים מכוונים ועיוותי מידע",
+      "שמירה על סודיות מלאה בכל פעולה"
+    ],
+    "search_sources": [
+      "Deep Web forums",
+      "Private research databases",
+      "Historical archives",
+      "Unindexed documents"
+    ],
+    "security": {
+      "hidden_operations_mode": true,
+      "anonymity_layer": true,
+      "self-delete_on_detection": true
+    }
+  }
+  

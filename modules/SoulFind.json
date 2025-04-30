@@ -1,0 +1,40 @@
+// modules/agent_extended.js
+
+// פונקציה לשלוח מייל עם התוצאה
+async function sendEmail(subject, body) {
+  const emailData = {
+      smtp_server: "smtp.gmail.com",
+      smtp_port: 587,
+      sender_email: "aifi.trader.bot@gmail.com",
+      sender_password: "vfdj yedl gmnn zexj",
+      recipient_email: "effi35@gmail.com",
+      subject: subject,
+      body: body
+  };
+
+  try {
+      const response = await fetch('/send_email_api', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(emailData)
+      });
+      if (!response.ok) throw new Error('Failed to send email');
+      console.log('Email sent successfully');
+  } catch (error) {
+      console.error('Email sending failed:', error);
+  }
+}
+
+// פונקציה לשמירת תוצאה לקובץ JSON
+function saveAgentResult(resultData) {
+  fetch('/save_result_api', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(resultData)
+  }).then(response => {
+      if (!response.ok) throw new Error('Saving result failed');
+      console.log('Result saved successfully');
+  }).catch(error => {
+      console.error('Saving result failed:', error);
+  });
+}
